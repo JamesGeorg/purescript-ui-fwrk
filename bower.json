@@ -1,0 +1,22 @@
+{
+  "name": "frwk",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "output"
+  ],
+  "scripts" : {
+    "watch" : "pulp -w build"
+  },
+  "dependencies": {
+    "purescript-prelude": "^4.0.1",
+    "purescript-console": "^4.0.0",
+    "purescript-effect": "^2.0.0",
+    "purescript-halogen-vdom" : "https://github.com/JamesGeorg/purescript-halogen-vdom.git#ui-frwk",
+    "purescript-behaviors" : "v8.0.0"
+  },
+  "devDependencies": {
+    "purescript-psci-support": "^4.0.0"
+  }
+}

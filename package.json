@@ -1,0 +1,19 @@
+{
+  "name": "frwk",
+  "version": "1.0.0",
+  "description": "Sample code for how to build your own ui framework",
+  "main": "index.js",
+  "scripts": {
+    "test": "npm run test"
+  },
+  "keywords": [
+    "ui",
+    "framework"
+  ],
+  "author": "George James",
+  "license": "ISC",
+  "devDependencies": {
+    "pulp": "^15.0.0",
+    "purescript": "^0.13.8"
+  }
+}
