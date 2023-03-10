@@ -4,7 +4,9 @@
   "description": "Sample code for how to build your own ui framework",
   "main": "index.js",
   "scripts": {
-    "test": "npm run test"
+    "watch": "pulp -w build --to dist/pulp.js",
+    "build": "pulp build --to dist/pulp.js && webpack --mode=development",
+    "server": "webpack serve --mode=development"
   },
   "keywords": [
     "ui",
@@ -13,7 +15,14 @@
   "author": "George James",
   "license": "ISC",
   "devDependencies": {
+    "@babel/core": "^7.20.5",
+    "@babel/preset-env": "^7.20.2",
+    "ajv": "^7.2.4",
+    "babel-loader": "^9.1.0",
     "pulp": "^15.0.0",
-    "purescript": "^0.13.8"
+    "purescript": "^0.13.8",
+    "webpack": "^5.75.0",
+    "webpack-cli": "^5.0.0",
+    "webpack-dev-server": "^4.11.1"
   }
 }

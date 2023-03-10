@@ -6,9 +6,6 @@
     "bower_components",
     "output"
   ],
-  "scripts" : {
-    "watch" : "pulp -w build"
-  },
   "dependencies": {
     "purescript-prelude": "^4.0.1",
     "purescript-console": "^4.0.0",

@@ -9,7 +9,7 @@ import FRP.Behavior (sample_, unfold)
 import FRP.Event (EventIO, create, subscribe)
 import Halogen.VDom (Step, VDom, VDomSpec(..), buildVDom, step)
 import Halogen.VDom.DOM.Prop (Prop, buildProp)
-import Unsafe.Coerce (unsafeCoerce)
+import Web.DOM (Document)
 
 type Screen state action = 
   { state :: state
@@ -17,13 +17,13 @@ type Screen state action =
   , view :: (action -> Effect Unit) -> state -> VDom (Array (Prop (Effect Unit)))
   }
 
-spec :: VDomSpec (Array (Prop (Effect Unit)))
-spec = VDomSpec {
-  buildAttributes : buildProp identity
-, document : unsafeCoerce
-    {
+foreign import getDocument :: Effect Document
+foreign import attachMachine :: forall a b. Step a b -> Effect Unit
 
-    }
+spec :: Document -> VDomSpec (Array (Prop (Effect Unit)))
+spec doc = VDomSpec {
+  buildAttributes : buildProp identity
+, document : doc
 }
 
 createScreen :: forall state action. Screen state action -> Effect (Effect Unit)
@@ -33,8 +33,12 @@ createScreen screen = do
   -- push is a function that will call all subscribers to the event
   ({push, event} :: EventIO action) <- create
 
+  -- Make shift mechanism to draw UI
+  doc <- getDocument
+
   -- VDOM
-  machine <- runEffectFn1 (buildVDom spec) $ screen.view push screen.state
+  machine <- runEffectFn1 (buildVDom (spec doc)) $ screen.view push screen.state
+  attachMachine machine
 
   -- Create a reference
   latestMachine <- new machine
